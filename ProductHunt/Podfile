@@ -1,0 +1,12 @@
+platform :ios, '11.0'
+
+project '/Users/Apple/Developer/ProductHunt/ProductHunt.xcodeproj'
+
+use_frameworks!
+
+target 'ProductHunt' do
+    pod 'DropDown'
+    pod 'SwiftyJSON'
+    pod 'Alamofire'
+    pod 'Kingfisher'
+end
