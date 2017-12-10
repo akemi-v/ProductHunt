@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import DropDown
 
 class ProductsListViewController: UIViewController {
+    
+    
+    @IBOutlet weak var dropDownButton: UIButton!
+    let dropDown = DropDown()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +26,24 @@ class ProductsListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Actions
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func showCategories(_ sender: UIButton) {
+        dropDown.show()
+        
+        dropDown.selectionAction = { [weak self] (index: Int, item: String) in
+            self?.dropDownButton.setTitle(item, for: .normal)
+        }
     }
-    */
-
+    
+    // MARK: - Private methods
+    
+    private func setupDropdown() {
+        dropDown.anchorView = dropDownButton
+        dropDown.dataSource = ["Car", "Kettenkrad"]
+        dropDownButton.setTitle("Choose category", for: .normal)
+    }
+    
 }
+
+
