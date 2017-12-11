@@ -9,8 +9,8 @@
 import Foundation
 import SwiftyJSON
 
-class CategoriesParser : Parser<[String]> {
-    override func parse(data: Data) -> [String]? {
+class CategoriesParser : Parser<([String], [String])> {
+    override func parse(data: Data) -> ([String], [String])? {
         
         let json = JSON(data)
         
@@ -20,14 +20,17 @@ class CategoriesParser : Parser<[String]> {
         }
         
         var categoriesNames = [String]()
+        var categoriesSlugs = [String]()
+
         
         for category in categories {
-            if let name = category["name"].string {
+            if let name = category["name"].string,
+                let slug = category["slug"].string {
                 categoriesNames.append(name)
+                categoriesSlugs.append(slug)
             }
-            
         }
         
-        return categoriesNames
+        return (categoriesNames, categoriesSlugs)
     }
 }

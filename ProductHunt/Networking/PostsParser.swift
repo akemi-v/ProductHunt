@@ -25,9 +25,9 @@ class PostsParser : Parser<[ProductModel]> {
             if let name = post["name"].string,
                 let description = post["tagline"].string,
                 let upvotesCount = post["votes_count"].int,
-                let thumbnailUrl = post["thumbnail"]["image_url"].string,
-                let productUrl = post["redirect_url"].string,
-                let screenshotUrl = post["screenshot_url"]["850px"].string {
+                let thumbnailUrl = post["thumbnail"]["image_url"].url,
+                let productUrl = post["redirect_url"].url,
+                let screenshotUrl = post["screenshot_url"]["850px"].url {
                 
                 let model = ProductModel(name: name, description: description, upvotesCount: upvotesCount, thumbnailUrl: thumbnailUrl, productUrl: productUrl, screenshotUrl: screenshotUrl)
                 models.append(model)

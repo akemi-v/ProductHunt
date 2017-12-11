@@ -9,25 +9,35 @@
 import UIKit
 import DropDown
 
-class ProductsListViewController: UIViewController, IProductsListModelDelegate {
+class ProductsListViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var dropDownButton: UIButton!
     let dropDown = DropDown()
     
     let model : IProductsListModel = ProductsListModel(requestSender: RequestSender())
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupDropdown()
+        setupTableView()
         
         model.delegate = self
-        model.fetchCategories()
-        let index = model.categories.index(of: "Tech")
-        navigationItem.title = "Tech"
-        dropDown.selectRow(at: index)
+        
+        let group = DispatchGroup()
+        group.enter()
+        
+        model.fetchCategories {
+            if let index = self.model.categories.index(of: "Tech"){
+                self.navigationItem.title = "Tech"
+                self.model.fetchProducts(forGiven: self.model.slugs[index])
+                self.dropDown.selectRow(at: index)
+            }
+        }
+        
+        
         
     }
 
@@ -43,7 +53,7 @@ class ProductsListViewController: UIViewController, IProductsListModelDelegate {
         
         dropDown.selectionAction = { [weak self] (index: Int, category: String) in
             self?.navigationItem.title = category
-            self?.model.fetchProducts(forGiven: category)
+            self?.model.fetchProducts(forGiven: (self?.model.slugs[index])!)
         }
     }
     
@@ -54,6 +64,49 @@ class ProductsListViewController: UIViewController, IProductsListModelDelegate {
         dropDownButton.setTitle("Press to change category", for: .normal)
     }
     
+    private func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.estimatedRowHeight = 144
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        let nib = UINib(nibName: "ProductTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "Product Cell Identifier")
+
+    }
+    
+}
+
+extension ProductsListViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.products.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let identifier = "Product Cell Identifier"
+        var cell : ProductTableViewCell
+        if let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: identifier) as? ProductTableViewCell {
+            cell = dequeuedCell
+        } else {
+            cell = ProductTableViewCell(style: .default, reuseIdentifier: identifier)
+        }
+        
+        cell.configure(with: model.products[indexPath.row])
+        
+        return cell
+    }
+}
+
+extension ProductsListViewController : UITableViewDelegate {
+    
+}
+
+extension ProductsListViewController : IProductsListModelDelegate {
+
+    func reload() {
+        tableView.reloadData()
+    }
 }
 
 

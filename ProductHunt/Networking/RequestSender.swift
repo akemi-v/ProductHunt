@@ -19,23 +19,15 @@ class RequestSender : IRequestSender {
         }
         
         Alamofire.request(urlRequest).responseJSON { response in
-//            print("Request: \(String(describing: response.request))")   // original url request
-//            print("Response: \(String(describing: response.response))") // http url response
-//            print("Result: \(response.result)")                         // response serialization result
-//            
-//            if let json = response.result.value {
-//                print("JSON: \(json)") // serialized json response
-//            }
-//            
-//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-//                print("Data: \(utf8Text)") // original server data as UTF8 string
-//            }
-            
-            
             
             if let error = response.error {
                 completionHandler(Result.Fail(error.localizedDescription))
             }
+            
+//            print("Request: \(String(describing: response.request))")   // original url request
+//            print("Response: \(String(describing: response.response))") // http url response
+//            print("Result: \(response.result)")                         // response serialization result
+
             
             guard let data = response.data,
                 let parsedModel: Model = config.parser.parse(data: data) else {

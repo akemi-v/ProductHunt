@@ -12,7 +12,7 @@ struct ProductModel {
     let name : String
     let description : String
     let upvotesCount : Int
-    let thumbnailUrl : String
-    let productUrl : String
-    let screenshotUrl : String
+    let thumbnailUrl : URL
+    let productUrl : URL
+    let screenshotUrl : URL
 }
