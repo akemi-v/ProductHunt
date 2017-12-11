@@ -474,12 +474,13 @@ extension DropDown {
 			return
 		}
 
-		xConstraint.constant = layout.x
-		yConstraint.constant = layout.y
-		widthConstraint.constant = layout.width
-		heightConstraint.constant = layout.visibleHeight
+        xConstraint.constant = layout.x
+        yConstraint.constant = layout.y
+        widthConstraint.constant = layout.width
+        heightConstraint.constant = layout.visibleHeight
 
-		tableView.isScrollEnabled = layout.offscreenHeight > 0
+//        tableView.isScrollEnabled = layout.offscreenHeight > 0
+        tableView.isScrollEnabled = true
 
 		DispatchQueue.main.async { [unowned self] in
 			self.tableView.flashScrollIndicators()
@@ -879,7 +880,13 @@ extension DropDown {
 
 	/// Returns the height needed to display all cells.
 	fileprivate var tableHeight: CGFloat {
-		return tableView.rowHeight * CGFloat(dataSource.count)
+        if tableView.numberOfRows(inSection: 0) < 10 {
+            return tableView.rowHeight * CGFloat(dataSource.count)
+        }
+        else {
+            return 500
+        }
+//        return tableView.rowHeight * CGFloat(dataSource.count)
 	}
 
 }

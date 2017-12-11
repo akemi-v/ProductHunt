@@ -9,16 +9,26 @@
 import UIKit
 import DropDown
 
-class ProductsListViewController: UIViewController {
+class ProductsListViewController: UIViewController, IProductsListModelDelegate {
     
     
     @IBOutlet weak var dropDownButton: UIButton!
     let dropDown = DropDown()
     
+    let model : IProductsListModel = ProductsListModel(requestSender: RequestSender())
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupDropdown()
+        
+        model.delegate = self
+        model.fetchCategories()
+        let index = model.categories.index(of: "Tech")
+        navigationItem.title = "Tech"
+        dropDown.selectRow(at: index)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,8 +41,9 @@ class ProductsListViewController: UIViewController {
     @IBAction func showCategories(_ sender: UIButton) {
         dropDown.show()
         
-        dropDown.selectionAction = { [weak self] (index: Int, item: String) in
-            self?.dropDownButton.setTitle(item, for: .normal)
+        dropDown.selectionAction = { [weak self] (index: Int, category: String) in
+            self?.navigationItem.title = category
+            self?.model.fetchProducts(forGiven: category)
         }
     }
     
@@ -40,10 +51,10 @@ class ProductsListViewController: UIViewController {
     
     private func setupDropdown() {
         dropDown.anchorView = dropDownButton
-        dropDown.dataSource = ["Car", "Kettenkrad"]
-        dropDownButton.setTitle("Choose category", for: .normal)
+        dropDownButton.setTitle("Press to change category", for: .normal)
     }
     
 }
+
 
 

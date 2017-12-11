@@ -9,8 +9,8 @@
 import Foundation
 import SwiftyJSON
 
-class CategoriesParser : IParser {
-    func parse(data: Data) -> [String]? {
+class CategoriesParser : Parser<[String]> {
+    override func parse(data: Data) -> [String]? {
         
         let json = JSON(data)
         

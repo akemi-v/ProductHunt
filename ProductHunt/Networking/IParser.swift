@@ -10,5 +10,5 @@ import Foundation
 
 protocol IParser : class {
     associatedtype Model
-    func parse(data: Data) -> [Model]?
+    func parse(data: Data) -> Model?
 }
