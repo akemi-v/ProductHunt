@@ -113,16 +113,28 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GA0-Mz-FCd">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFE-ti-KgM" userLabel="Button View">
                                         <rect key="frame" x="0.0" y="350" width="355" height="44"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GA0-Mz-FCd">
+                                                <rect key="frame" x="137.5" y="0.0" width="80" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="80" id="ZLW-aX-y7G"/>
+                                                    <constraint firstAttribute="height" constant="44" id="tdi-mi-qRH"/>
+                                                </constraints>
+                                                <state key="normal" title="Get it"/>
+                                                <connections>
+                                                    <action selector="getItButtonPressed:" destination="zxQ-ox-Ex8" eventType="touchUpInside" id="ixk-z0-aTo"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="tdi-mi-qRH"/>
+                                            <constraint firstItem="GA0-Mz-FCd" firstAttribute="top" secondItem="cFE-ti-KgM" secondAttribute="top" id="0s3-5t-Qa1"/>
+                                            <constraint firstItem="GA0-Mz-FCd" firstAttribute="centerX" secondItem="cFE-ti-KgM" secondAttribute="centerX" id="BBE-8c-qMj"/>
+                                            <constraint firstAttribute="bottom" secondItem="GA0-Mz-FCd" secondAttribute="bottom" id="BGV-X3-7hK"/>
                                         </constraints>
-                                        <state key="normal" title="Get it"/>
-                                        <connections>
-                                            <action selector="getItButtonPressed:" destination="zxQ-ox-Ex8" eventType="touchUpInside" id="ixk-z0-aTo"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cf2-ME-WdN">
                                         <rect key="frame" x="0.0" y="404" width="355" height="223"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -130,9 +142,13 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="yOh-xQ-OYR" firstAttribute="width" secondItem="txi-0g-qJt" secondAttribute="width" id="EP0-HD-H6u"/>
+                                    <constraint firstItem="Cf2-ME-WdN" firstAttribute="top" secondItem="cFE-ti-KgM" secondAttribute="bottom" constant="10" id="J2l-wp-PQi"/>
                                     <constraint firstItem="Ago-e9-PdN" firstAttribute="top" secondItem="yOh-xQ-OYR" secondAttribute="bottom" constant="10" id="c9n-lh-RH3"/>
+                                    <constraint firstItem="cFE-ti-KgM" firstAttribute="leading" secondItem="txi-0g-qJt" secondAttribute="leading" id="cPA-PF-v8k"/>
+                                    <constraint firstItem="cFE-ti-KgM" firstAttribute="top" secondItem="5cR-hV-hB0" secondAttribute="bottom" constant="10" id="iPP-Dd-SRJ"/>
                                     <constraint firstItem="yOh-xQ-OYR" firstAttribute="leading" secondItem="txi-0g-qJt" secondAttribute="leading" id="kOA-Hd-OZv"/>
                                     <constraint firstAttribute="trailing" secondItem="yOh-xQ-OYR" secondAttribute="trailing" id="oBQ-7s-Rdm"/>
+                                    <constraint firstAttribute="trailing" secondItem="cFE-ti-KgM" secondAttribute="trailing" id="qoA-EG-dUX"/>
                                     <constraint firstItem="yOh-xQ-OYR" firstAttribute="top" secondItem="txi-0g-qJt" secondAttribute="top" id="sfx-ny-yuf"/>
                                 </constraints>
                             </stackView>

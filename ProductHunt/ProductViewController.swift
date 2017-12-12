@@ -27,31 +27,9 @@ class ProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activityIndicator.hidesWhenStopped = true
+        setupUI()
+        setupProductUI()
         
-        guard let product = self.product else {
-            print("No product model")
-            return
-        }
-        
-        imageScrollView.delegate = self
-        
-        DispatchQueue.main.async {
-            self.activityIndicator.hidesWhenStopped = true
-            self.activityIndicator.startAnimating()
-            self.screenshotImageView.kf.setImage(with: product.screenshotUrl)
-            self.screenshotImageView.kf.setImage(with: product.screenshotUrl, placeholder: nil, options: nil, progressBlock: nil, completionHandler: {(image, error, cacheType, imageURL) -> () in
-                self.activityIndicator.stopAnimating()
-            })
-            self.screenshotImageView.contentMode = .scaleToFill
-            
-            self.nameLabel.text = product.name
-            self.descriptionLabel.text = product.description
-            self.upvotesCountLabel.text = "▲ \(product.upvotesCount)"
-            
-            self.setZoomScale()
-        }
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,6 +48,40 @@ class ProductViewController: UIViewController {
     
     // MARK: - Private methods
     
+    private func setupUI() {
+        activityIndicator.hidesWhenStopped = true
+        imageScrollView.delegate = self
+        getItButton.layer.masksToBounds = true
+        getItButton.layer.cornerRadius = 10
+        getItButton.backgroundColor = UIColor(red: 128/255, green: 223/255, blue: 255/255, alpha: 1.0)
+        getItButton.layer.borderWidth = 1
+        getItButton.layer.borderColor = UIColor .blue.cgColor
+    }
+    
+    private func setupProductUI() {
+        guard let product = self.product else {
+            print("No product model")
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.activityIndicator.hidesWhenStopped = true
+            self.activityIndicator.startAnimating()
+            self.screenshotImageView.kf.setImage(with: product.screenshotUrl)
+            self.screenshotImageView.kf.setImage(with: product.screenshotUrl, placeholder: nil, options: nil, progressBlock: nil, completionHandler: {(image, error, cacheType, imageURL) -> () in
+                self.activityIndicator.stopAnimating()
+            })
+            self.screenshotImageView.contentMode = .scaleToFill
+            
+            self.nameLabel.text = product.name
+            self.descriptionLabel.text = product.description
+            self.upvotesCountLabel.text = "▲ \(product.upvotesCount)"
+            
+            self.setZoomScale()
+        }
+        
+    }
+    
     private func setZoomScale() {
         let imageViewSize = screenshotSize
         let scrollViewSize = imageScrollView.bounds.size
@@ -80,6 +92,8 @@ class ProductViewController: UIViewController {
         imageScrollView.minimumZoomScale = minZoomScale
         imageScrollView.setZoomScale(minZoomScale, animated: true)
     }
+    
+    
 
 }
 
