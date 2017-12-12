@@ -70,7 +70,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="txi-0g-qJt">
                                 <rect key="frame" x="10" y="30" width="355" height="627"/>
                                 <subviews>
-                                    <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yOh-xQ-OYR">
+                                    <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="355" placeholderIntrinsicHeight="248.5" translatesAutoresizingMaskIntoConstraints="NO" id="yOh-xQ-OYR">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="248.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sSk-1k-AED">
@@ -79,7 +79,7 @@
                                                     <constraint firstAttribute="width" secondItem="sSk-1k-AED" secondAttribute="height" multiplier="1480:1037" id="AOu-bd-s3m"/>
                                                 </constraints>
                                             </imageView>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="OrX-mj-hbT">
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="OrX-mj-hbT">
                                                 <rect key="frame" x="167" y="114" width="20" height="20"/>
                                             </activityIndicatorView>
                                         </subviews>
@@ -117,9 +117,10 @@
                                         <rect key="frame" x="0.0" y="350" width="355" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GA0-Mz-FCd">
-                                                <rect key="frame" x="137.5" y="0.0" width="80" height="44"/>
+                                                <rect key="frame" x="142.5" y="0.0" width="70" height="44"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="ZLW-aX-y7G"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="613-Qi-Lg3"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="ZLW-aX-y7G"/>
                                                     <constraint firstAttribute="height" constant="44" id="tdi-mi-qRH"/>
                                                 </constraints>
                                                 <state key="normal" title="Get it"/>

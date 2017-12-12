@@ -50,6 +50,7 @@ class ProductViewController: UIViewController {
     
     private func setupUI() {
         activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
         imageScrollView.delegate = self
         getItButton.layer.masksToBounds = true
         getItButton.layer.cornerRadius = 10
@@ -59,23 +60,19 @@ class ProductViewController: UIViewController {
     }
     
     private func setupProductUI() {
-        guard let product = self.product else {
-            print("No product model")
-            return
-        }
         
         DispatchQueue.main.async {
-            self.activityIndicator.hidesWhenStopped = true
-            self.activityIndicator.startAnimating()
-            self.screenshotImageView.kf.setImage(with: product.screenshotUrl)
-            self.screenshotImageView.kf.setImage(with: product.screenshotUrl, placeholder: nil, options: nil, progressBlock: nil, completionHandler: {(image, error, cacheType, imageURL) -> () in
+        
+            self.screenshotImageView.kf.setImage(with: self.product?.screenshotUrl, placeholder: nil, options: [.forceRefresh, .forceTransition], progressBlock: nil, completionHandler: {(_, _, _, _) -> () in
+                DispatchQueue.main.async{
                 self.activityIndicator.stopAnimating()
+                }
             })
             self.screenshotImageView.contentMode = .scaleToFill
             
-            self.nameLabel.text = product.name
-            self.descriptionLabel.text = product.description
-            self.upvotesCountLabel.text = "▲ \(product.upvotesCount)"
+            self.nameLabel.text = self.product?.name
+            self.descriptionLabel.text = self.product?.description
+            self.upvotesCountLabel.text = "▲ \(self.product?.upvotesCount ?? 0)"
             
             self.setZoomScale()
         }
