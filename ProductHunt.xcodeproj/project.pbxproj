@@ -17,6 +17,7 @@
 		185538A61FDE8AD200BB7823 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185538A51FDE8AD200BB7823 /* Parser.swift */; };
 		185538A91FDEDBC200BB7823 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185538A71FDEDBC200BB7823 /* ProductTableViewCell.swift */; };
 		185538AA1FDEDBC200BB7823 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185538A81FDEDBC200BB7823 /* ProductTableViewCell.xib */; };
+		185538E11FE00C3100BB7823 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 185538E01FE00C3100BB7823 /* Media.xcassets */; };
 		186649DB1FDC24C700315D9D /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186649DA1FDC24C700315D9D /* ProductModel.swift */; };
 		186649DD1FDC278100315D9D /* PostsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186649DC1FDC278100315D9D /* PostsParser.swift */; };
 		186649DF1FDC2EB400315D9D /* PostsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186649DE1FDC2EB400315D9D /* PostsRequest.swift */; };
@@ -41,6 +42,7 @@
 		185538A51FDE8AD200BB7823 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		185538A71FDEDBC200BB7823 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		185538A81FDEDBC200BB7823 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
+		185538E01FE00C3100BB7823 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		186649DA1FDC24C700315D9D /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		186649DC1FDC278100315D9D /* PostsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsParser.swift; sourceTree = "<group>"; };
 		186649DE1FDC2EB400315D9D /* PostsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsRequest.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				18C755591FDB3ED100BF2B72 /* Info.plist */,
 				185538A71FDEDBC200BB7823 /* ProductTableViewCell.swift */,
 				185538A81FDEDBC200BB7823 /* ProductTableViewCell.xib */,
+				185538E01FE00C3100BB7823 /* Media.xcassets */,
 			);
 			path = ProductHunt;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185538E11FE00C3100BB7823 /* Media.xcassets in Resources */,
 				18C755581FDB3ED100BF2B72 /* LaunchScreen.storyboard in Resources */,
 				185538AA1FDEDBC200BB7823 /* ProductTableViewCell.xib in Resources */,
 				18C755551FDB3ED100BF2B72 /* Assets.xcassets in Resources */,
@@ -429,6 +433,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5R44JKFPWH;
 				INFOPLIST_FILE = ProductHunt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Maria-Semakova.ProductHunt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -445,6 +450,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5R44JKFPWH;
 				INFOPLIST_FILE = ProductHunt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Maria-Semakova.ProductHunt";
 				PRODUCT_NAME = "$(TARGET_NAME)";

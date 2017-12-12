@@ -19,7 +19,8 @@ class ProductTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.thumbnailImageView.image = UIImage(named: "pic_placeholder")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,7 +34,7 @@ class ProductTableViewCell: UITableViewCell {
             self.nameLabel.text = product.name
             self.descriptionLabel.text = product.description
             self.upvotesCountLabel.text = "▲ \(product.upvotesCount)"
-            self.thumbnailImageView.kf.setImage(with: product.thumbnailUrl)
+            self.thumbnailImageView.kf.setImage(with: product.thumbnailUrl, placeholder: UIImage(named:"pic_placeholder"), options: nil, progressBlock: nil, completionHandler: nil)
             self.thumbnailImageView.contentMode = .scaleAspectFill
             self.thumbnailImageView.clipsToBounds = true
         }

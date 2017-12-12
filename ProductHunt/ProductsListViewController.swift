@@ -17,12 +17,16 @@ class ProductsListViewController: UIViewController {
     let dropDown = DropDown()
     
     let model : IProductsListModel = ProductsListModel(requestSender: RequestSender())
+    
+    let refreshControl : UIRefreshControl = UIRefreshControl()
+    var currentSlug : String = "Tech"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupDropdown()
         setupTableView()
+        setupRefreshControl()
         
         model.delegate = self
         
@@ -32,7 +36,7 @@ class ProductsListViewController: UIViewController {
         model.fetchCategories {
             if let index = self.model.categories.index(of: "Tech"){
                 self.navigationItem.title = "Tech"
-                self.model.fetchProducts(forGiven: self.model.slugs[index])
+                self.model.fetchProducts(forGiven: self.model.slugs[index], nil)
                 self.dropDown.selectRow(at: index)
             }
         }
@@ -45,6 +49,7 @@ class ProductsListViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
     // MARK: - Actions
 
@@ -53,7 +58,10 @@ class ProductsListViewController: UIViewController {
         
         dropDown.selectionAction = { [weak self] (index: Int, category: String) in
             self?.navigationItem.title = category
-            self?.model.fetchProducts(forGiven: (self?.model.slugs[index])!)
+            if let slug = self?.model.slugs[index] {
+                self?.currentSlug = slug
+                self?.model.fetchProducts(forGiven: slug, nil)
+            }
         }
     }
     
@@ -69,10 +77,23 @@ class ProductsListViewController: UIViewController {
         tableView.delegate = self
         tableView.estimatedRowHeight = 144
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorStyle = .none
         
         let nib = UINib(nibName: "ProductTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "Product Cell Identifier")
 
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    @objc private func refresh(_ sender: Any) {
+        model.fetchProducts(forGiven: currentSlug) {
+            self.refreshControl.endRefreshing()
+        }
     }
     
 }
@@ -99,7 +120,13 @@ extension ProductsListViewController : UITableViewDataSource {
 }
 
 extension ProductsListViewController : UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let productVC = storyboard?.instantiateViewController(withIdentifier: "ProductVC") as? ProductViewController {
+            productVC.product = model.products[indexPath.row]
+            navigationController?.pushViewController(productVC, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
 }
 
 extension ProductsListViewController : IProductsListModelDelegate {

@@ -17,7 +17,7 @@ protocol IProductsListModel : class {
     var products : [ProductModel] { get set }
     
     func fetchCategories(_ completionHandler: (() -> Void)?)
-    func fetchProducts(forGiven category: String)
+    func fetchProducts(forGiven category: String, _ completionHandler: (() -> Void)?)
 }
 
 protocol IProductsListModelDelegate : class {
@@ -60,7 +60,7 @@ class ProductsListModel : IProductsListModel {
         }
     }
     
-    func fetchProducts(forGiven category: String) {
+    func fetchProducts(forGiven category: String, _ completionHandler: (() -> Void)?) {
         
         postsRequest.topic = category
         
@@ -70,7 +70,9 @@ class ProductsListModel : IProductsListModel {
             case .Success(let posts):
                 self.products = posts
                 self.delegate?.reload()
-                print(posts.count)
+                if let handler = completionHandler {
+                    handler()
+                }
             case .Fail(let error):
                 print(error)
             }
