@@ -119,6 +119,9 @@
                                             <constraint firstAttribute="height" constant="44" id="tdi-mi-qRH"/>
                                         </constraints>
                                         <state key="normal" title="Get it"/>
+                                        <connections>
+                                            <action selector="getItButtonPressed:" destination="zxQ-ox-Ex8" eventType="touchUpInside" id="ixk-z0-aTo"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cf2-ME-WdN">
                                         <rect key="frame" x="0.0" y="404" width="355" height="223"/>

@@ -59,6 +59,15 @@ class ProductViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Actions
+    
+    
+    @IBAction func getItButtonPressed(_ sender: UIButton) {
+        if let url = product?.productUrl {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     // MARK: - Private methods
     
     private func setZoomScale() {
