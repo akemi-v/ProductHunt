@@ -62,13 +62,15 @@ class ProductViewController: UIViewController {
     private func setupProductUI() {
         
         DispatchQueue.main.async {
-        
-            self.screenshotImageView.kf.setImage(with: self.product?.screenshotUrl, placeholder: nil, options: [.forceRefresh, .forceTransition], progressBlock: nil, completionHandler: {(_, _, _, _) -> () in
+            
+            self.screenshotImageView.kf.setImage(with: self.product?.screenshotUrl, placeholder: nil, options: [.transition(.fade(0.2)), .forceTransition], progressBlock: nil, completionHandler: {(_, _, _, _) -> () in
                 DispatchQueue.main.async{
-                self.activityIndicator.stopAnimating()
+                    self.activityIndicator.stopAnimating()
+                    self.screenshotImageView.center = self.imageScrollView.center
                 }
             })
             self.screenshotImageView.contentMode = .scaleToFill
+            
             
             self.nameLabel.text = self.product?.name
             self.descriptionLabel.text = self.product?.description
@@ -80,14 +82,9 @@ class ProductViewController: UIViewController {
     }
     
     private func setZoomScale() {
-        let imageViewSize = screenshotSize
-        let scrollViewSize = imageScrollView.bounds.size
-        let widthScale = scrollViewSize.width / imageViewSize.width
-        let heightScale = scrollViewSize.height / imageViewSize.height
-        
-        let minZoomScale = min(widthScale, heightScale)
-        imageScrollView.minimumZoomScale = minZoomScale
-        imageScrollView.setZoomScale(minZoomScale, animated: true)
+        imageScrollView.minimumZoomScale = 1.0
+        imageScrollView.maximumZoomScale = 5.0
+        imageScrollView.setZoomScale(1.0, animated: true)
     }
     
     

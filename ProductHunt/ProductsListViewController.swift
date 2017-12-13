@@ -13,7 +13,7 @@ class ProductsListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var dropDownButton: UIButton!
+    let dropDownButton = UIButton()
     let dropDown = DropDown()
     
     let model : IProductsListModel = ProductsListModel(requestSender: RequestSender())
@@ -57,7 +57,7 @@ class ProductsListViewController: UIViewController {
         dropDown.show()
         
         dropDown.selectionAction = { [weak self] (index: Int, category: String) in
-            self?.navigationItem.title = category
+            self?.dropDownButton.setTitle("\(category) ⌄", for: .normal)
             if let slug = self?.model.slugs[index] {
                 self?.currentSlug = slug
                 self?.model.fetchProducts(forGiven: slug, nil)
@@ -68,8 +68,16 @@ class ProductsListViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupDropdown() {
+        
         dropDown.anchorView = dropDownButton
-        dropDownButton.setTitle("Press to change category", for: .normal)
+        dropDownButton.setTitle("\(currentSlug) ⌄", for: .normal)
+        dropDownButton.frame = CGRect(origin:CGPoint.zero, size:CGSize(width: self.view.frame.width, height: 40))
+        dropDownButton.setTitleColor(.black, for: .normal)
+        self.navigationItem.titleView = dropDownButton
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(showCategories(_:)))
+        dropDownButton.isUserInteractionEnabled = true
+        dropDownButton.addGestureRecognizer(recognizer)
     }
     
     private func setupTableView() {
@@ -133,6 +141,11 @@ extension ProductsListViewController : IProductsListModelDelegate {
 
     func reload() {
         tableView.reloadData()
+    }
+    
+    func presentAlertMessage(_ alertController: UIAlertController) {
+        self.present(alertController, animated: true, completion: nil)
+        self.refreshControl.endRefreshing()
     }
 }
 

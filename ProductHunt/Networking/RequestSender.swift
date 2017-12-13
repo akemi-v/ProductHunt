@@ -24,11 +24,6 @@ class RequestSender : IRequestSender {
                 completionHandler(Result.Fail(error.localizedDescription))
             }
             
-//            print("Request: \(String(describing: response.request))")   // original url request
-//            print("Response: \(String(describing: response.response))") // http url response
-//            print("Result: \(response.result)")                         // response serialization result
-
-            
             guard let data = response.data,
                 let parsedModel: Model = config.parser.parse(data: data) else {
                     completionHandler(Result.Fail("Received data can't be parsed"))

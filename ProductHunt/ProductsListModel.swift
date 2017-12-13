@@ -24,6 +24,8 @@ protocol IProductsListModelDelegate : class {
     var dropDown : DropDown { get }
     
     func reload()
+    
+    func presentAlertMessage(_ alertController: UIAlertController)
 }
 
 class ProductsListModel : IProductsListModel {
@@ -68,10 +70,21 @@ class ProductsListModel : IProductsListModel {
         requestSender.send(config: config) { (result: Result<[ProductModel]>) in
             switch result {
             case .Success(let posts):
-                self.products = posts
-                self.delegate?.reload()
-                if let handler = completionHandler {
-                    handler()
+                
+                if (posts.count == 0) {
+                    self.products = posts
+                    let alertController = UIAlertController(title: "No products of this category for today", message: nil, preferredStyle: .alert)
+                    let alertOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(alertOkAction)
+                    self.delegate?.presentAlertMessage(alertController)
+                    self.delegate?.reload()
+                    
+                } else {
+                    self.products = posts.sorted { $0.upvotesCount > $1.upvotesCount }
+                    self.delegate?.reload()
+                    if let handler = completionHandler {
+                        handler()
+                    }
                 }
             case .Fail(let error):
                 print(error)

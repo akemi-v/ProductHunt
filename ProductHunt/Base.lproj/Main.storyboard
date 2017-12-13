@@ -20,30 +20,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uJs-jJ-K8f">
-                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="zmL-3m-geu">
-                                <rect key="frame" x="0.0" y="64" width="375" height="40"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="stq-RA-sVd"/>
-                                </constraints>
-                                <state key="normal">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="showCategories:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r7t-hl-ddZ"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uJs-jJ-K8f" secondAttribute="trailing" id="3xK-dF-dIs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zmL-3m-geu" secondAttribute="trailing" id="FkN-5e-cPu"/>
-                            <constraint firstItem="zmL-3m-geu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Lxe-qT-IhC"/>
-                            <constraint firstItem="zmL-3m-geu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="he2-6j-p9N"/>
-                            <constraint firstItem="uJs-jJ-K8f" firstAttribute="top" secondItem="zmL-3m-geu" secondAttribute="bottom" id="hfX-WV-h2q"/>
+                            <constraint firstItem="uJs-jJ-K8f" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="duo-uZ-hzR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uJs-jJ-K8f" secondAttribute="bottom" id="lN1-39-Efj"/>
                             <constraint firstItem="uJs-jJ-K8f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ySr-nI-jLj"/>
                         </constraints>
@@ -51,7 +35,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="nmy-yl-dtC"/>
                     <connections>
-                        <outlet property="dropDownButton" destination="zmL-3m-geu" id="xQT-KV-OVK"/>
                         <outlet property="tableView" destination="uJs-jJ-K8f" id="4IP-xA-402"/>
                     </connections>
                 </viewController>
@@ -70,13 +53,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="txi-0g-qJt">
                                 <rect key="frame" x="10" y="30" width="355" height="627"/>
                                 <subviews>
-                                    <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="355" placeholderIntrinsicHeight="248.5" translatesAutoresizingMaskIntoConstraints="NO" id="yOh-xQ-OYR">
+                                    <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="355" placeholderIntrinsicHeight="248.5" translatesAutoresizingMaskIntoConstraints="NO" id="yOh-xQ-OYR">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="248.5"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sSk-1k-AED">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sSk-1k-AED">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="248.5"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="sSk-1k-AED" secondAttribute="height" multiplier="1480:1037" id="AOu-bd-s3m"/>
+                                                    <constraint firstAttribute="width" constant="355" id="Lov-IA-ejg"/>
+                                                    <constraint firstAttribute="height" constant="248.5" id="uUN-Te-l2G"/>
                                                 </constraints>
                                             </imageView>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="OrX-mj-hbT">
@@ -85,12 +69,10 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="sSk-1k-AED" secondAttribute="trailing" id="OSa-ZE-ZtC"/>
-                                            <constraint firstAttribute="width" constant="355" id="WM1-e0-Gfv"/>
                                             <constraint firstAttribute="width" secondItem="yOh-xQ-OYR" secondAttribute="height" multiplier="1480:1037" id="Xta-8z-uFQ"/>
                                             <constraint firstItem="sSk-1k-AED" firstAttribute="top" secondItem="yOh-xQ-OYR" secondAttribute="top" id="au5-RO-kmm"/>
                                             <constraint firstAttribute="bottom" secondItem="sSk-1k-AED" secondAttribute="bottom" id="hn3-v2-7Sk"/>
                                             <constraint firstItem="OrX-mj-hbT" firstAttribute="centerX" secondItem="yOh-xQ-OYR" secondAttribute="centerX" id="pTm-QC-uox"/>
-                                            <constraint firstAttribute="height" constant="248.5" id="vjy-pP-64K"/>
                                             <constraint firstItem="sSk-1k-AED" firstAttribute="leading" secondItem="yOh-xQ-OYR" secondAttribute="leading" id="wtB-1u-tef"/>
                                             <constraint firstItem="OrX-mj-hbT" firstAttribute="centerY" secondItem="yOh-xQ-OYR" secondAttribute="centerY" id="xZl-SL-zAv"/>
                                         </constraints>

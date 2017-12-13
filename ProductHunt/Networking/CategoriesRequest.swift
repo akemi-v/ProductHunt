@@ -12,9 +12,11 @@ class CategoriesRequest : IRequest {
     
     private var baseUrl: String = "https://api.producthunt.com/"
     private var acсessToken: String = "591f99547f569b05ba7d8777e2e0824eea16c440292cce1f8dfb3952cc9937ff"
+    private var perPage: String = "10"
+    private var trending: String = "true"
     
     var urlRequest: URLRequest? {
-        let urlString: String = "\(baseUrl)v1/topics/?access_token=\(acсessToken)"
+        let urlString: String = "\(baseUrl)v1/topics/?access_token=\(acсessToken)&per_page=\(perPage)&search[trending]=\(trending)"
         
         if let url = URL(string: urlString) {
             return URLRequest(url: url)
